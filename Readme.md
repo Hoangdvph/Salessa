@@ -72,5 +72,20 @@
     ```
 
 ## Đặt tên file
-
+1. Models
 Tên file trong Models không có "s" ở cuối bvaf viết hoa chữ cái đầu
+
+## Note
+
+@extends('layouts.master') : kế thừa tên file
+- truyền vào tên folder  
+- dấu chấm để phân tầng 
+- truyền vào tên file
+
+@section('Name')
+    // truyền dữ liệu vào
+@endsection
+
+@yield('name') : tạo khoảng trắng trong div
+
+

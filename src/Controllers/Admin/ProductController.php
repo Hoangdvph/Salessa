@@ -54,6 +54,7 @@ class ProductController extends Controller
         $validation = $validator->make($_POST + $_FILES, [
             'category_id'   => 'required',
             'name'          => 'required',
+            'price'         => 'required',
             'overview'      => 'max:500', // giới hạn 500 từ
             'content'       => 'max:65000',
             'img_thumbnail' => 'uploaded_file:0,2M,png,jpg,jpeg',
@@ -73,17 +74,22 @@ class ProductController extends Controller
             $data = [
                 'category_id'   => $_POST['category_id'],
                 'name'          => $_POST['name'],
-                'overview'      => $_POST['overview'], 
+                'price'      => $_POST['price'],
+                'overview'      => $_POST['overview'],
                 'content'       => $_POST['content'],
-                'img_thumbnail' => $_FILES['img_thumbnail'],
+                
             ];
-
+            // Helper::debug($data);
             if (!empty($_FILES['img_thumbnail']) && $_FILES['img_thumbnail']['size'] > 0) {
 
                 $from = $_FILES['img_thumbnail']['tmp_name'];
                 $to   = 'assets/uploads/' . time() . $_FILES['img_thumbnail']['name'];
 
                 if (move_uploaded_file($from, PATH_ROOT . $to)) {
+                    
+                    // thêm vào phần tử với chỉ số index, phần tử nếu là mới
+                    // thêm sẽ nằm cuối, dù giá trị index bao nhiêu
+                    // $bienmang[index] = $giatri; 
                     $data['img_thumbnail'] = $to;
                 } else {
                     $_SESSION['errors']['img_thumbnail'] = 'Upload KHÔNG thành công!';
@@ -100,7 +106,6 @@ class ProductController extends Controller
 
             header('Location: ' . url('admin/products'));
             exit;
-
         }
     }
 
@@ -129,7 +134,7 @@ class ProductController extends Controller
     public function update($id)
     {
         $product = $this->product->findByID($id);
-
+        
         // VALIDATE
         $validator = new Validator;
         $validation = $validator->make($_POST + $_FILES, [
@@ -154,14 +159,15 @@ class ProductController extends Controller
                 'content'       => $_POST['content'],
                 'updated_at'    => date('Y-m-d H:i:s')
             ];
-
+            // Helper::debug($data);
             if (!empty($_FILES['img_thumbnail']) && $_FILES['img_thumbnail']['size'] > 0) {
 
                 $from = $_FILES['img_thumbnail']['tmp_name'];
+                
                 // to là đường dẫn tới nơi lưu trữ file
                 $to   = 'assets/uploads/' . time() . $_FILES['img_thumbnail']['name'];
 
-                
+
                 if (move_uploaded_file($from, PATH_ROOT . $to)) {
                     $data['img_thumbnail'] = $to;
                 } else {
@@ -174,7 +180,9 @@ class ProductController extends Controller
 
             $this->product->update($id, $data);
 
-            if ($product['img_thumbnail'] && file_exists( PATH_ROOT . $product['img_thumbnail'] ) ) {
+            // kiểm tra xem product['img_thumbnail'] có dữ liệu hay không và kiểm tra xem file có tồn tại hay không ?
+
+            if ($product['img_thumbnail'] && file_exists(PATH_ROOT . $product['img_thumbnail'])) {
                 unlink(PATH_ROOT . $product['img_thumbnail']);
             }
 
@@ -193,7 +201,7 @@ class ProductController extends Controller
 
             $this->product->delete($id);
 
-            if ($product['img_thumbnail'] && file_exists( PATH_ROOT . $product['img_thumbnail'] ) ) {
+            if ($product['img_thumbnail'] && file_exists(PATH_ROOT . $product['img_thumbnail'])) {
                 unlink(PATH_ROOT . $product['img_thumbnail']);
             }
 

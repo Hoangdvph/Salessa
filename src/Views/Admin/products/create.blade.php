@@ -35,6 +35,11 @@
                     <input type="file" class="form-control" id="img_thumbnail" placeholder="Enter img_thumbnail"
                         name="img_thumbnail">
                 </div>
+                <div class="mb-3 mt-3">
+                    <label for="img_thumbnail" class="form-label">Price :</label>
+                    <input type="text" class="form-control" id="price" placeholder="Enter price"
+                        name="price">
+                </div>
             </div>
 
             <div class="col-md-6">
@@ -46,7 +51,7 @@
 
                 <div class="mb-3 mt-3">
                     <label for="content" class="form-label">Content:</label>
-                    <textarea class="form-control" id="content" rows="4" placeholder="Enter content"
+                    <textarea class="form-control" id="content" rows="7" placeholder="Enter content"
                         name="content"></textarea>
                 </div>
             </div>

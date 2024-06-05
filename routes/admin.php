@@ -1,8 +1,11 @@
 <?php
 
+use XuongOop\Salessa\Controllers\Admin\DashBoardController;
 use XuongOop\Salessa\Controllers\Admin\ProductController;
 
 $router->mount('/admin', function () use ($router) {
+
+    $router->get('/', DashBoardController::class . '@dashboard');
     
     $router->mount('/products', function () use ($router) {
 

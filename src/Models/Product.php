@@ -14,9 +14,10 @@ class Product extends Model
         return $this->queryBuilder
             ->select(
                 'p.id',
-                'p.category_id',
+                'p.category_',
                 'p.name',
                 'p.img_thumbnail',
+                'p.price',
                 'p.created_at',
                 'p.updated_at',
                 'c.name as c_name'
@@ -25,6 +26,27 @@ class Product extends Model
             ->innerJoin('p', 'categories', 'c', 'c.id = p.category_id')
             ->orderBy('p.id', 'desc')
             ->fetchAllAssociative();
+    }
+    public function findByID($id)
+    {
+        return $this->queryBuilder
+            ->select(
+                'p.id',
+                'p.category_id',
+                'p.name',
+                'p.img_thumbnail',
+                'p.price',
+                'p.overview',
+                'p.content',
+                'p.created_at',
+                'p.updated_at',
+                'c.name as c_name'
+            )
+            ->from($this->tableName, 'p')
+            ->innerJoin('p', 'categories', 'c', 'c.id = p.category_id')
+            ->where('p.id = ?')
+            ->setParameter(0, $id)
+            ->fetchAssociative();
     }
 
     public function paginate($page = 1, $perPage = 5)
@@ -56,6 +78,7 @@ class Product extends Model
                 'p.category_id',
                 'p.name',
                 'p.img_thumbnail',
+                'p.price',
                 'p.created_at',
                 'p.updated_at',
                 'c.name as c_name'
