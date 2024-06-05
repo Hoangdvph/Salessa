@@ -52,7 +52,8 @@ class Product extends Model
 
         $data = $queryBuilder
             ->select(
-                'p.id' . 'p.category_id',
+                'p.id',
+                'p.category_id',
                 'p.name',
                 'p.img_thumbnail',
                 'p.created_at',
