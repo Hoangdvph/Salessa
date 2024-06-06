@@ -77,6 +77,8 @@ Tên file trong Models không có "s" ở cuối bvaf viết hoa chữ cái đ�
 
 ## Note
 
+file master.blade.php : giống như kiểu định hình chung bố cục một trang web
+
 @extends('layouts.master') : kế thừa tên file
 - truyền vào tên folder  
 - dấu chấm để phân tầng 
@@ -87,5 +89,7 @@ Tên file trong Models không có "s" ở cuối bvaf viết hoa chữ cái đ�
 @endsection
 
 @yield('name') : tạo khoảng trắng trong div
+
+@include('name') : truyền tương tự như extents
 
 

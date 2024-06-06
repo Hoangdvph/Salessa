@@ -27,7 +27,14 @@ class ProductController extends Controller
     {
         // $products = $this->product->all();
         [$products, $totalPage] = $this->product->paginate();
+        // [$product, $totalPage]= $this->product->paginate(1,8);
+        // Helper::debug($product);
         //truyền tên thư mục sau đó truyền tên file, sau đó dùng dấu chấm để chia tầng
+
+        $page = $_GET['page'] ?? 1;
+        if($page <=0){
+            header('Loca');
+        }
         $this->renderViewAdmin('products.index', [
             'products' => $products,
             'totalPage' => $totalPage
@@ -36,7 +43,7 @@ class ProductController extends Controller
 
     public function create()
     {
-        // lấy toàn bộ bản ghi trong bản categorys
+        // lấy toàn bộ bản ghi trong bản categorysb  
         $categorys = $this->category->all();
         // Helper::debug($categorys);
         // arrary_colum gán lấy trường id làm key trong mảng
@@ -112,7 +119,7 @@ class ProductController extends Controller
     public function show($id)
     {
         $product = $this->product->findByID($id);
-
+        Helper::debug($product);
         $this->renderViewAdmin('products.show', [
             'product' => $product
         ]);
