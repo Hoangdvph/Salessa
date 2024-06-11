@@ -119,7 +119,7 @@ class ProductController extends Controller
     public function show($id)
     {
         $product = $this->product->findByID($id);
-        Helper::debug($product);
+        // Helper::debug($product);
         $this->renderViewAdmin('products.show', [
             'product' => $product
         ]);
@@ -162,6 +162,7 @@ class ProductController extends Controller
             $data = [
                 'category_id'   => $_POST['category_id'],
                 'name'          => $_POST['name'],
+                'price'         => $_POST['price'],
                 'overview'      => $_POST['overview'],
                 'content'       => $_POST['content'],
                 'updated_at'    => date('Y-m-d H:i:s')

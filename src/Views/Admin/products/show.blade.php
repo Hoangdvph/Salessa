@@ -1,48 +1,64 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.master')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-</head>
+@section('title')
+    Chi tiết sản phẩm
+@endsection
 
-<body>
-    <h1>Chi tiết sản phẩm</h1>
-    
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <td>ID</td>
-                <td>Category Name</td>
-                <td>Name</td>
-                <td>Image</td>
-                <td>Price</td>
-                <td>created_at</td>
-                <td>updated_at</td>
-                <td>Action</td>
-            </tr>
-        </thead>
-        <tbody>
-                <tr>
-                    <td><?= $product['id'] ?></td>
-                    <td><?= $product['c_name'] ?></td>
-                    <td><?= $product['name'] ?></td>
-                    <td><img src="{{ asset($pro['img_thumbnail']) }}" alt=""  width="100px"></td>
-                    <td><?= $product['price'] ?></td>
-                    <td><?= $product['overview'] ?></td>
-                    <td><?= $product['content'] ?></td>
-                    <td><?= $product['created_at'] ?></td>
-                    <td><?= $product['updated_at'] ?></td>
-                    <td>
-                        <a href="{{ url("admin/products/") }}" class="btn btn-info">Danh sách</a>
-                    </td>
-                </tr>
-        </tbody>
-    </table>
-</body>
+@section('content')
 
-</html>
+<div class="row justify-content-center">
+    <div class="col-lg-12">
+        <div class="white_card card_height_100 mb_30">
+            <div class="white_card_header">
+                <div class="box_header m-0">
+                    <div class="main-title">
+                        <h1 class="m-0">Chi tiết sản phảm: {{ $product['name'] }}</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="white_card_body">
+                
+                <div class="table-responsive">
+                    
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <td>ID</td>
+                                <td>Category Name</td>
+                                <td>Name</td>
+                                <td>Image</td>
+                                <td>Price</td>
+                                <td>Overview</td>
+                                <td>Content</td>
+                                <td>created_at</td>
+                                <td>updated_at</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><?= $product['id'] ?></td>
+                                <td><?= $product['c_name'] ?></td>
+                                <td><?= $product['name'] ?></td>
+                                <td><img src="{{ asset($product['img_thumbnail']) }}" alt="" width="150px"></td>
+                                <td><?= $product['price'] ?></td>
+                                <td><?= $product['overview'] ?></td>
+                                <td><?= $product['content'] ?></td>
+                                <td><?= $product['created_at'] ?></td>
+                                <td><?= $product['updated_at'] ?></td>
+                                
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+@endsection
+
+
+
+

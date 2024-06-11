@@ -14,10 +14,11 @@ class Product extends Model
         return $this->queryBuilder
             ->select(
                 'p.id',
-                'p.category_',
+                'p.category_id',
                 'p.name',
                 'p.img_thumbnail',
                 'p.price',
+                'p.price_sale',
                 'p.created_at',
                 'p.updated_at',
                 'c.name as c_name'
@@ -36,6 +37,7 @@ class Product extends Model
                 'p.name',
                 'p.img_thumbnail',
                 'p.price',
+                'p.price_sale',
                 'p.overview',
                 'p.content',
                 'p.created_at',
@@ -49,7 +51,7 @@ class Product extends Model
             ->fetchAssociative();
     }
 
-    public function paginate($page = 1, $perPage = 5)
+    public function paginate($page = 1, $perPage = 8)
     {
         $queryBuilder = clone ($this->queryBuilder);
 
@@ -79,6 +81,7 @@ class Product extends Model
                 'p.name',
                 'p.img_thumbnail',
                 'p.price',
+                'p.price_sale',
                 'p.created_at',
                 'p.updated_at',
                 'c.name as c_name'
@@ -92,4 +95,15 @@ class Product extends Model
 
         return [$data, $totalPage];
     }
+
+    public function findByIDCate($id){
+        return $this->queryBuilder
+        ->select('*')
+        ->from($this->tableName)
+        ->where('category_id = ?')
+        ->setParameter(0, $id)
+        ->fetchAllAssociative();
+    }
+    
+    // SELECT COUNT(*) AS SoLuong FROM `products` WHERE category_id = 1 GROUP BY category_id;
 }

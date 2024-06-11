@@ -19,7 +19,7 @@
                 <div class="white_card_body">
                     
                     <div class="table-responsive">
-                        <a href="{{ url('admin/products/create') }}" class="btn btn-primary">Thêm mới</a>
+                        {{-- <a href="{{ url('admin/products/create') }}" class="btn btn-primary">Thêm mới</a> --}}
                         
                         <table class="table table-striped">
                             <thead>

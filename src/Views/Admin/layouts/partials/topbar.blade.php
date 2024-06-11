@@ -122,9 +122,9 @@
                                 <h5>Dr. Robar Smith</h5>
                             </div>
                             <div class="profile_info_details">
-                                <a href="#">My Profile </a>
+                                <a href="">{{  $_SESSTION['user']['name']}} </a>
                                 <a href="#">Settings</a>
-                                <a href="#">Log Out </a>
+                                <a href="{{ url('admin/logout') }}">Log Out </a>
                             </div>
                         </div>
                     </div>
